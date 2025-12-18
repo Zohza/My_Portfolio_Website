@@ -13,7 +13,7 @@ const HeroSection = () => {
 <div className=' flex align-center justify-center'>
 <div id='home' className={cn(' flex md:flex justify-around items-center transition duration-500  min-h-screen w-full   md:container lg:w-[65%]',isVisible ? 'opacity-100 translate-x-0': 'translate-x-10 opacity-0')}>
   <div >
-    <img src="src/assets/portfolio_img2.png" alt="image of Boluwatife" className=' hidden rounded-full md:block md:w-200 lg:250' />
+    <img src="/portfolio_img2.png" alt="image of Boluwatife" className=' hidden rounded-full md:block md:w-200 lg:250' />
   </div>
   <div  className='relative flex flex-col justify-center align-center min-h-screen px-4 gap-4'>
 
