@@ -54,7 +54,7 @@ const [toast, setToast] =useState('')
      setFormData({...formData, [name]:value})
   }
   return (
-    <section id="contact" className="py-24 px-4 relative bg-secondary/30 w-[70%] mx-auto">
+    <section id="contact" className="py-24 px-4 relative bg-secondary/30 sm:w-full md:w-[70%] mx-auto">
       <div className="container mx-auto max-w-5xl">
         <h2 className="text-3xl md:4xl mt-12 font-bold text-center">
           Get In <span className="text-primary">Touch</span>

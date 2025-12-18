@@ -26,7 +26,7 @@ const AboutMe = () => {
                 href="src/assets/CV.pdf"
                  download="Boluwatife_Gbadamosi_CV.pdf"
                 target="_blank"
-                className="border-primary bg-primary/30 text-center border-2 rounded-full w-40 flex items-center justify-center"
+                className="border-primary bg-primary/30 text-center border-2 rounded-full  w-full md:w-40  flex items-center justify-center"
               >
                 Download Cv
               </a>

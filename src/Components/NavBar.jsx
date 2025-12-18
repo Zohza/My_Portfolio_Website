@@ -52,8 +52,9 @@ const NavBar = () => {
               {item.name}
             </a>
           ))}
-          <ThemeToggle />
+       
         </div>
+           <ThemeToggle />
     </div>
 
         {/* Mobile toggle button */}

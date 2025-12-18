@@ -78,7 +78,7 @@ const SkillsSection = () => {
               >
         
               </div>
-              <div className="text-right text-sm mt-2">{skill.level}%</div>
+            
 
             </div>
             <div></div>
