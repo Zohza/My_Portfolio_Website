@@ -79,6 +79,10 @@
   }
 }
 
+button {
+  cursor: pointer;
+}
+
 /* -------------------------
   Utilities
 -------------------------- */
@@ -123,7 +127,7 @@
   .cosmic-button {
     @apply px-6 py-2 rounded-full font-medium duration-300 hover:scale-105 active:scale-95;
     background-color: hsl(var(--primary));
-    color: hsl(var(--primary-foreground));
+    color: #333;
     transition: all 0.3s;
     box-shadow: 0 0 10px rgba(138, 92, 246, 0.5);
   }
