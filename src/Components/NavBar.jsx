@@ -58,10 +58,12 @@ const NavBar = () => {
     </div>
 
         {/* Mobile: Theme toggle + hamburger aligned */}
-        <div className="flex md:hidden items-center gap-2">
+        <div className="flex md:hidden items-center">
+            <div>
           <ThemeToggle />
+            </div>
           <button
-            className="z-50 text-foreground p-1"
+            className="z-50 text-foreground p-1 mr-4"
             onClick={() => setIsOpen((prev) => !prev)}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
