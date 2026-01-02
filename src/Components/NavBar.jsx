@@ -40,7 +40,7 @@ const NavBar = () => {
           </span>
         </a>
 
-    <div>
+    <div className="hidden md:block">
           {/* Desktop menu */}
         <div className="hidden md:flex space-x-8 items-center">
           {navItems.map((item, key) => (
@@ -57,13 +57,16 @@ const NavBar = () => {
            <ThemeToggle />
     </div>
 
-        {/* Mobile toggle button */}
-        <button
-          className="md:hidden z-50 text-foreground mr-6"
-          onClick={() => setIsOpen((prev) => !prev)}
-        >
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        {/* Mobile: Theme toggle + hamburger aligned */}
+        <div className="flex md:hidden items-center gap-2">
+          <ThemeToggle />
+          <button
+            className="z-50 text-foreground p-1"
+            onClick={() => setIsOpen((prev) => !prev)}
+          >
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
 
         {/* Mobile menu */}
         <div

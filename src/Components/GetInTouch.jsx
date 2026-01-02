@@ -3,7 +3,9 @@ import { FaWhatsapp } from "react-icons/fa";
 import { useState } from "react";
 import React from "react";
 import {cn} from '../lib/utils'
-import Toast from "./Toast";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../lib/firebase";
+import toast from 'react-hot-toast';
 
 const GetInTouch = () => {
 const [formData, setFormData]= useState({
@@ -12,7 +14,6 @@ const [formData, setFormData]= useState({
     message:''
   })
 const [errors, setErrors]=useState({})
-const [toast, setToast] =useState('')
 
   function validate(){
   const newErrors={};
@@ -33,21 +34,24 @@ const [toast, setToast] =useState('')
       return Object.keys(newErrors).length === 0
       
   }
-  const handleSubmit= (e)=>{
+  const handleSubmit = async (e) => {
       e.preventDefault();
 
-      if( validate()){
-        setToast('Form successfully submitted!')
-        setFormData({ name: '', email: '', message:''})
-        setErrors({ })
-     
+      if(validate()){
+        const toastId = toast.loading('Sending message...');
+        try {
+          await addDoc(collection(db, "messages"), {
+             ...formData,
+             timestamp: new Date()
+          });
+          toast.success('Message sent successfully!', { id: toastId });
+          setFormData({ name: '', email: '', message: '' });
+          setErrors({});
+        } catch (error) {
+          console.error("Error sending message: ", error);
+          toast.error('Error sending message. Please try again.', { id: toastId });
+        }
       }
-      setTimeout(()=>{
-        setToast('')
-      },3000)
-      
-
-
   }
   function handleChange(e){
     const {name , value}= e.target;
@@ -130,7 +134,6 @@ const [toast, setToast] =useState('')
 
 
         <form className="space-y-6"onSubmit={handleSubmit}>
-          {toast && <Toast toast={toast}/>}
           <label htmlFor="name" className=" text-sm font-semibold mb-5">Name</label>
           <input type="text" id="name" required name="name" placeholder="John Jonah..." className="w-full px-4 py-3 bg-background focus:ring-2 rounded-md border-input focus:ring-primary outline-hidden " value={formData.name} onChange={handleChange}/>
 

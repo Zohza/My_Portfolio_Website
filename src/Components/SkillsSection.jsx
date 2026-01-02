@@ -1,52 +1,25 @@
-import React from "react";
-import {useState} from 'react'
+import React, { useState, useEffect } from "react";
 import { cn } from "../lib/utils";
-const skills = [
-  {
-    name: "HTML/CSS",
-    level: 100,
-    category: "Frontend",
-  },
-  {
-    name: "Javascript",
-    level: 100,
-    category: "Frontend",
-  },
-  {
-    name: "React",
-    level: 100,
-    category: "Frontend",
-  },
-  {
-    name: "Tailwind CSS",
-    level: 100,
-    category: "Frontend",
-  },
-  {
-    name: "MySql",
-    level: 100,
-    category: "Backend",
-  },
-  {
-    name: "Git/GitHub",
-    level: 100,
-    category: "Frontend",
-  },
-  {
-    name: "VS code",
-    level: 100,
-    category: "Frontend",
-  },
-    {
-    name: "python",
-    level: 100,
-    category: "Backend",
-  },
-];
-const CategoryList = ['All', 'Frontend','Backend']
+import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
+import { db } from "../lib/firebase";
+const CategoryList = ['All', 'Frontend', 'Backend', 'Tools']
 const SkillsSection = () => {
-  const [category, setCategory]= useState('All')
-  const filteredSkills =skills.filter((s)=> category ==='All' || s.category===category)
+  const [category, setCategory] = useState('All')
+  const [skills, setSkills] = useState([])
+
+  useEffect(() => {
+    const q = query(collection(db, "skills"), orderBy("category", "asc"));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const skillsData = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setSkills(skillsData);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const filteredSkills = skills.filter((s) => category === 'All' || s.category === category)
 
   return (
     <section id="skills" className=" md:skill py-24 px-4 relative bg-secondary/30 w-[75%] mx-auto">

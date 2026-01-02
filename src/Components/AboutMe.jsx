@@ -1,7 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Briefcase, Code, User } from "lucide-react";
+import { doc, onSnapshot } from "firebase/firestore";
+import { db } from "../lib/firebase";
 
 const AboutMe = () => {
+  const [aboutData, setAboutData] = useState({
+    headline: "Passionate of building AI Products for problem solving",
+    bio1: "I’m a passionate AI developer focused on building useful projects. I’m also learning project management and UI design to better plan, structure, and design the tools I create.",
+    bio2: "python, reactjs, fastapi",
+    skillsSummary: "",
+    cvUrl: "src/assets/CV.pdf"
+  });
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(doc(db, "content", "about"), (doc) => {
+      if (doc.exists()) {
+        setAboutData(doc.data());
+      }
+    });
+    return () => unsubscribe();
+  }, []);
+
   return (
     <section
       id="about"
@@ -13,18 +32,25 @@ const AboutMe = () => {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
-            <h3 className="font-bold text-2xl">Passionate of building AI Products for problem solving</h3>
+            <h3 className="font-bold text-2xl">{aboutData.headline}</h3>
             <p className="text-muted-foreground">
-        I’m a passionate AI developer focused on building useful projects. I’m also learning project management and UI design to better plan, structure, and design the tools I create.
+              {aboutData.bio1}
             </p>
-            <p className="text-muted-foreground">python, reactjs, fastapi</p>
+            {aboutData.bio2 && (
+              <p className="text-muted-foreground">
+                {aboutData.bio2}
+              </p>
+            )}
+            {aboutData.skillsSummary && (
+              <p className="text-muted-foreground">{aboutData.skillsSummary}</p>
+            )}
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="#contact" className="cosmic-button">
                 Get in Touch
               </a>
               <a
-                href="src/assets/CV.pdf"
-                 download="Boluwatife_Gbadamosi_CV.pdf"
+                href={aboutData.cvUrl || "src/assets/CV.pdf"}
+                download="Boluwatife_Gbadamosi_CV.pdf"
                 target="_blank"
                 className="border-primary bg-primary/30 text-center border-2 rounded-full  w-full md:w-40  flex items-center justify-center"
               >
