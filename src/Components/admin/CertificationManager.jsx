@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { collection, addDoc, deleteDoc, doc, onSnapshot, query, orderBy, updateDoc } from 'firebase/firestore';
-import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import { db, storage } from '../../lib/firebase';
+import { db } from '../../lib/firebase';
 import { Plus, Save, X, Award, Trash2, Pencil, ExternalLink, Image as ImageIcon, ChevronUp, ChevronDown } from 'lucide-react';
 import toast from 'react-hot-toast';
+
+const CLOUDINARY_CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+const CLOUDINARY_UPLOAD_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
 
 const CertificationManager = () => {
   const [isAdding, setIsAdding] = useState(false);
@@ -11,7 +13,7 @@ const CertificationManager = () => {
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(true);
   const [certs, setCerts] = useState([]);
-  const [uploadProgress, setUploadProgress] = useState(0);
+  const [isUploading, setIsUploading] = useState(false);
 
   const [formData, setFormData] = useState({
     title: '',
@@ -45,28 +47,50 @@ const CertificationManager = () => {
     setFormData({ ...formData, [name]: type === 'checkbox' ? checked : value });
   };
 
-  const handleImageUpload = (e) => {
+  const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
-    const storageRef = ref(storage, `certs/${Date.now()}_${file.name}`);
-    const uploadTask = uploadBytesResumable(storageRef, file);
+    if (file.size > 10 * 1024 * 1024) {
+      toast.error("File too large. Max 10MB.");
+      return;
+    }
 
-    uploadTask.on('state_changed', 
-      (snapshot) => {
-        setUploadProgress((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-      },
-      (error) => {
-        toast.error("Upload failed: " + error.message);
-      },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          setFormData(prev => ({ ...prev, imgUrl: downloadURL }));
-          toast.success("Image uploaded!");
-          setUploadProgress(0);
-        });
+    if (!CLOUDINARY_CLOUD_NAME || !CLOUDINARY_UPLOAD_PRESET) {
+      toast.error("Cloudinary not configured. Check your .env file.");
+      return;
+    }
+
+    setIsUploading(true);
+    const toastId = toast.loading("Uploading to Cloudinary...");
+
+    const formDataUpload = new FormData();
+    formDataUpload.append('file', file);
+    formDataUpload.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+
+    try {
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
+        {
+          method: 'POST',
+          body: formDataUpload
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.secure_url) {
+        setFormData(prev => ({ ...prev, imgUrl: data.secure_url }));
+        toast.success("Image uploaded!", { id: toastId });
+      } else {
+        throw new Error(data.error?.message || "Upload failed");
       }
-    );
+    } catch (error) {
+      console.error("Cloudinary upload error:", error);
+      toast.error("Upload failed: " + error.message, { id: toastId });
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -206,15 +230,15 @@ const CertificationManager = () => {
           <div className="space-y-2">
             <label className="text-sm font-medium">Certificate Image</label>
             <div className="flex items-center gap-4">
-              <label className="flex-1 border-2 border-dashed border-border rounded-xl p-4 text-center cursor-pointer hover:border-primary/50 transition-colors">
-                <input type="file" className="hidden" onChange={handleImageUpload} accept="image/*" />
+              <label className={`flex-1 border-2 border-dashed border-border rounded-xl p-4 text-center cursor-pointer hover:border-primary/50 transition-colors ${isUploading ? 'opacity-50 pointer-events-none' : ''}`}>
+                <input type="file" className="hidden" onChange={handleImageUpload} accept="image/*" disabled={isUploading} />
                 {formData.imgUrl ? (
                   <div className="flex items-center justify-center gap-2 text-primary font-medium">
                     <ImageIcon size={20} /> Image Uploaded (Click to Change)
                   </div>
                 ) : (
                   <div className="text-muted-foreground">
-                    {uploadProgress > 0 ? `Uploading ${Math.round(uploadProgress)}%` : "Click to Upload Image"}
+                    {isUploading ? "Uploading..." : "Click to Upload Image"}
                   </div>
                 )}
               </label>

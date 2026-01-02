@@ -14,6 +14,9 @@ Skill section
 Projects section
 ![alt text](image-4.png)
 
+Certifications Section
+![alt text](image-7.png)
+
 contact me Section
 ![alt text](image-5.png)
 

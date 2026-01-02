@@ -12,16 +12,20 @@ const CertificationsSection = () => {
   useEffect(() => {
     const q = query(
       collection(db, "certifications"), 
-      where("isVisible", "==", true),
       orderBy("order", "asc")
     );
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      const certsData = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
+      const certsData = snapshot.docs
+        .map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }))
+        .filter(cert => cert.isVisible !== false);
       setCerts(certsData);
+      setLoading(false);
+    }, (error) => {
+      console.error("Error fetching certifications: ", error);
       setLoading(false);
     });
 
