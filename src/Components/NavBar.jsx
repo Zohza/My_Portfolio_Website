@@ -4,11 +4,11 @@ import { X, Menu } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 
 const navItems = [
-  { name: "home", href: "#home" },
-  { name: "about", href: "#about" },
-  { name: "skills", href: "#skills" },
-  { name: "projects", href: "#projects" },
-  { name: "contact", href: "#contact" },
+  { name: "HOME", href: "#home" },
+  { name: "ABOUT", href: "#about" },
+  { name: "SKILLS", href: "#skills" },
+  { name: "PROJECTS", href: "#projects" },
+  { name: "CONTACT", href: "#contact" },
 ];
 
 const NavBar = () => {
@@ -28,7 +28,7 @@ const NavBar = () => {
       className={cn(
         "flex w-screen z-40 transition-all duration-300 items-center justify-center",
         isScrolled
-          ? "py-3 bg-background/80 backdrop-blur-md shadow-sm"
+          ? "fixed py-3 bg-background/80 backdrop-blur-md shadow-sm"
           : "py-5"
       )}
     >
