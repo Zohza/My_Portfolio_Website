@@ -76,13 +76,13 @@ const [errors, setErrors]=useState({})
               <div className="p-3 rounded-full bg-primary/10">
                 <Mail className="h-6 w-6 text-primary" />
               </div>
-              <h4 className="font-medium mt-2">Email</h4>
+              <h4 className="font-medium mt-2 text-sm">Email</h4>
             </div>
             <a
               href="mailto:gbadamosiboluwatife2002@gmail.com"
-              className="text-primary hover:text-foreground transition-colors break-words"
+              className="text-primary hover:text-foreground transition-colors break-word text-sm"
             >
-              gbadamosiboluwatife2002@gmail.com
+              boluscript.dev@gmail.com
             </a>
           </h3>
         </div>
@@ -93,11 +93,11 @@ const [errors, setErrors]=useState({})
               <div className="p-3 rounded-full bg-primary/10">
                 <Phone className="h-6 w-6 text-primary" />
               </div>
-              <h4 className="font-medium mt-2">Phone</h4>
+              <h4 className="font-medium mt-2 text-sm">Phone</h4>
             </div>
             <a
               href="tel: +2349017354580"
-              className="text-primary hover:text-foreground transition-colors"
+              className="text-primary hover:text-foreground transition-colors text-sm"
             >
               +2349017354580
             </a>
@@ -110,14 +110,14 @@ const [errors, setErrors]=useState({})
               <div className="p-3 rounded-full bg-primary/10">
                 <MapPin className="h-6 w-6 text-primary" />
               </div>
-              <h4 className="font-medium mt-2">Location</h4>
+              <h4 className="font-medium mt-2 text-sm">Location</h4>
             </div>
-            <a className="text-primary hover:text-foreground transition-colors">
+            <a className="text-primary hover:text-foreground transition-colors text-sm">
               Lagos, Nigeria.
             </a>
           </h3>
                <div className="pt-8">
-        <h4 className="font-semibold text-2xl"> Connect with Me</h4>
+        <h4 className="font-semibold text-xl"> Connect with Me</h4> <br />
         <div className="flex space-x-4 justify-center">
           <a href="https://www.linkedin.com/in/gbadamosi-boluwatife-8263a0241/" target="_blank"> <Linkedin /></a>
            <a href="https://wa.me/2349017354580" target="_blank"> <FaWhatsapp size={25}/></a>

@@ -9,7 +9,7 @@ const AboutMe = () => {
     bio1: "I’m a passionate AI developer focused on building useful projects. I’m also learning project management and UI design to better plan, structure, and design the tools I create.",
     bio2: "python, reactjs, fastapi",
     skillsSummary: "",
-    cvUrl: "src/assets/CV.pdf"
+    cvUrl: "/CV.pdf"
   });
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const AboutMe = () => {
                 Get in Touch
               </a>
               <a
-                href={aboutData.cvUrl || "src/assets/CV.pdf"}
+                href={aboutData.cvUrl || "/CV.pdf"}
                 download="Boluwatife_Gbadamosi_CV.pdf"
                 target="_blank"
                 className="border-primary bg-primary/30 text-center border-2 rounded-full  w-full md:w-40  flex items-center justify-center"
