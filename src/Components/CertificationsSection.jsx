@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { collection, onSnapshot, query, where, orderBy } from 'firebase/firestore';
+import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 import { db } from '../lib/firebase';
 import { Award, Filter, ExternalLink, ChevronRight } from 'lucide-react';
 import CertModal from './CertModal';
@@ -35,9 +35,11 @@ const CertificationsSection = () => {
   if (!loading && certs.length === 0) return null;
 
   return (
-    <section id="certifications" className="py-24 px-4 relative">
-      <div className="container mx-auto max-w-6xl">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 justify-center">
+    <section id="certifications" className="relative py-16 md:py-24 lg:py-28 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto">
+        {/* Section accent glow */}
+        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-cyan-400/8 blur-[140px] rounded-full pointer-events-none" />
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div className="space-y-4 max-w-2xl">
             <h2 className="text-3xl md:text-5xl font-bold">
               Professional <span className="text-primary">Certifications</span>

@@ -58,99 +58,122 @@ const [errors, setErrors]=useState({})
      setFormData({...formData, [name]:value})
   }
   return (
-    <section id="contact" className="py-24 px-4 relative bg-secondary/30 sm:w-full md:w-[70%] mx-auto">
-      <div className="container mx-auto max-w-5xl">
-        <h2 className="text-3xl md:4xl mt-12 font-bold text-center">
-          Get In <span className="text-primary">Touch</span>
-        </h2>{" "}
+    <section id="contact" className="relative py-16 md:py-24 lg:py-28 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      {/* Hero-style background — grid + glow for visual consistency */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[radial-gradient(circle,rgba(34,197,94,0.08),transparent_70%)] blur-[120px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(120,120,120,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(120,120,120,0.08)_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(circle_at_center,white,transparent_90%)]" />
       </div>
-      <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-        {" "}
-        Have a project im mind, Feel free to reach out to collaborate'
-      </p>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-       <div>
-         <div className="space-y-8">
-          <h3 className="text-2xl font-semibold mb-6">
-            <div className="flex items-start justify-center space-x-4 ">
-              <div className="p-3 rounded-full bg-primary/10">
-                <Mail className="h-6 w-6 text-primary" />
+
+      <div className="max-w-6xl mx-auto relative z-10">
+        {/* HEADING */}
+        <div className="text-center mb-14">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground">
+            Get In <span className="text-primary">Touch</span>
+          </h2>
+          <div className="w-20 h-[3px] bg-emerald-400/80 mx-auto mt-4 rounded-full" />
+          <p className="text-muted-foreground mt-5 max-w-xl mx-auto text-sm sm:text-base">
+            Have a project in mind? Feel free to reach out and collaborate.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16">
+          {/* LEFT — CONTACT INFO */}
+          <div className="space-y-8">
+            {/* Email */}
+            <div className="bg-card/60 rounded-xl p-5 sm:p-6 border border-border/60 transition hover:border-emerald-500/30">
+              <div className="flex items-center gap-4">
+                <div className="p-3 rounded-full bg-emerald-500/10 shrink-0">
+                  <Mail className="h-5 w-5 text-primary" />
+                </div>
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Email</p>
+                  <a href="mailto:gbadamosiboluwatife2002@gmail.com" className="text-sm font-medium text-primary hover:text-foreground transition-colors break-words">
+                    boluscript.dev@gmail.com
+                  </a>
+                </div>
               </div>
-              <h4 className="font-medium mt-2 text-sm">Email</h4>
             </div>
-            <a
-              href="mailto:gbadamosiboluwatife2002@gmail.com"
-              className="text-primary hover:text-foreground transition-colors break-word text-sm"
-            >
-              boluscript.dev@gmail.com
-            </a>
-          </h3>
-        </div>
 
-        <div className="space-y-8">
-          <h3 className="text-2xl font-semibold mb-6">
-            <div className="flex items-start justify-center space-x-4 ">
-              <div className="p-3 rounded-full bg-primary/10">
-                <Phone className="h-6 w-6 text-primary" />
+            {/* Phone */}
+            <div className="bg-card/60 rounded-xl p-5 sm:p-6 border border-border/60 transition hover:border-emerald-500/30">
+              <div className="flex items-center gap-4">
+                <div className="p-3 rounded-full bg-emerald-500/10 shrink-0">
+                  <Phone className="h-5 w-5 text-primary" />
+                </div>
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Phone</p>
+                  <a href="tel:+2349017354580" className="text-sm font-medium text-primary hover:text-foreground transition-colors">
+                    +234 901 735 4580
+                  </a>
+                </div>
               </div>
-              <h4 className="font-medium mt-2 text-sm">Phone</h4>
             </div>
-            <a
-              href="tel: +2349017354580"
-              className="text-primary hover:text-foreground transition-colors text-sm"
-            >
-              +2349017354580
-            </a>
-          </h3>
-        </div>
 
-        <div className="space-y-8">
-          <h3 className="text-2xl font-semibold mb-6">
-            <div className="flex items-start justify-center space-x-4 ">
-              <div className="p-3 rounded-full bg-primary/10">
-                <MapPin className="h-6 w-6 text-primary" />
+            {/* Location */}
+            <div className="bg-card/60 rounded-xl p-5 sm:p-6 border border-border/60 transition hover:border-emerald-500/30">
+              <div className="flex items-center gap-4">
+                <div className="p-3 rounded-full bg-emerald-500/10 shrink-0">
+                  <MapPin className="h-5 w-5 text-primary" />
+                </div>
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Location</p>
+                  <p className="text-sm font-medium text-foreground">Lagos, Nigeria</p>
+                </div>
               </div>
-              <h4 className="font-medium mt-2 text-sm">Location</h4>
             </div>
-            <a className="text-primary hover:text-foreground transition-colors text-sm">
-              Lagos, Nigeria.
-            </a>
-          </h3>
-               <div className="pt-8">
-        <h4 className="font-semibold text-xl"> Connect with Me</h4> <br />
-        <div className="flex space-x-4 justify-center">
-          <a href="https://www.linkedin.com/in/gbadamosi-boluwatife-8263a0241/" target="_blank"> <Linkedin /></a>
-           <a href="https://wa.me/2349017354580" target="_blank"> <FaWhatsapp size={25}/></a>
 
-          <a href="https://www.instagram.com/bolu_gbadamosi" target="_blank"> <Instagram /></a>
+            {/* Social Links */}
+            <div className="pt-4">
+              <p className="text-sm font-semibold text-foreground mb-4">Connect with Me</p>
+              <div className="flex gap-3">
+                <a href="https://www.linkedin.com/in/gbadamosi-boluwatife-8263a0241/" target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl bg-card border border-border/60 text-muted-foreground hover:text-primary hover:border-primary/40 transition-all hover:-translate-y-0.5">
+                  <Linkedin size={20} />
+                </a>
+                <a href="https://wa.me/2349017354580" target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl bg-card border border-border/60 text-muted-foreground hover:text-primary hover:border-primary/40 transition-all hover:-translate-y-0.5">
+                  <FaWhatsapp size={20} />
+                </a>
+                <a href="https://www.instagram.com/bolu_gbadamosi" target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl bg-card border border-border/60 text-muted-foreground hover:text-primary hover:border-primary/40 transition-all hover:-translate-y-0.5">
+                  <Instagram size={20} />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT — CONTACT FORM */}
+          <div className="bg-card rounded-xl p-6 sm:p-8 border border-border/60 shadow-sm">
+            <h3 className="text-xl sm:text-2xl font-semibold text-foreground mb-6">Send a Message</h3>
+
+            <form className="space-y-5" onSubmit={handleSubmit}>
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-foreground/80 mb-1.5">Name</label>
+                <input type="text" id="name" required name="name" placeholder="Your name..." className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary/40 focus:border-primary outline-hidden transition text-sm" value={formData.name} onChange={handleChange} />
+              </div>
+
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-foreground/80 mb-1.5">Email</label>
+                <input type="email" id="email" required name="email" placeholder="your@email.com" className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary/40 focus:border-primary outline-hidden transition text-sm" value={formData.email} onChange={handleChange} />
+                {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email}</p>}
+              </div>
+
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium text-foreground/80 mb-1.5">Message</label>
+                <textarea id="message" required name="message" rows={4} placeholder="Tell me about your project..." className="w-full px-4 py-2.5 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary/40 focus:border-primary outline-hidden resize-none transition text-sm" value={formData.message} onChange={handleChange} />
+                {errors.message && <p className="text-xs text-red-500 mt-1">{errors.message}</p>}
+              </div>
+
+              <button type="submit" className={cn(
+                "w-full py-3 px-6 rounded-lg font-semibold text-sm transition-all duration-300 inline-flex items-center justify-center gap-2",
+                "bg-gradient-to-br from-lime-400 via-emerald-500 to-teal-700 text-white",
+                "shadow-[0_0_20px_rgba(16,185,129,0.25)] hover:shadow-[0_0_30px_rgba(16,185,129,0.35)]",
+                "hover:-translate-y-0.5 active:translate-y-0",
+              )}>
+                Send Message <Send size={16} />
+              </button>
+            </form>
+          </div>
         </div>
       </div>
-    
-        </div>
-       </div>
-
-         <div className="bg-card p-8 rounded-lg shadow-xs">
-        <h3 className="text-3=2xl font-semibold mb-6">Send us a Message</h3>
-
-
-        <form className="space-y-6"onSubmit={handleSubmit}>
-          <label htmlFor="name" className=" text-sm font-semibold mb-5">Name</label>
-          <input type="text" id="name" required name="name" placeholder="John Jonah..." className="w-full px-4 py-3 bg-background focus:ring-2 rounded-md border-input focus:ring-primary outline-hidden " value={formData.name} onChange={handleChange}/>
-
-          <label htmlFor="name" className=" text-sm font-semibold mb-5">Email</label>
-          <input type="email" id="email" required name="email" placeholder="example@gmail.com" value={formData.email} className="w-full px-4 py-3 bg-background focus:ring-2 rounded-md border-input focus:ring-primary outline-hidden" onChange={handleChange} />
-          {errors.email && <p>{errors.email}</p>}
-
-
-          <label htmlFor="name" className=" text-sm font-semibold mb-5">Message</label>
-          <textarea id="message" required name="message" placeholder="Hello, I'd like to talk about..." className="w-full px-4 py-3 bg-background focus:ring-2 rounded-md border-input focus:ring-primary outline-hidden resize-none" value={formData.message} onChange={handleChange}/>
-          {errors.message && <p>{errors.message}</p>}
-
-          <button type="submit" className={cn("cosmic-button w-full flex items-center justify-center gap-4", )}>Send Message <Send /></button>
-        </form>
-      </div>
-      </div>
- 
     </section>
   );
 };

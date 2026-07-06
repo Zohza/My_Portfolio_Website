@@ -6,105 +6,121 @@ import { db } from "../lib/firebase";
 const AboutMe = () => {
   const [aboutData, setAboutData] = useState({
     headline: "Passionate of building AI Products for problem solving",
-    bio1: "I’m a passionate AI developer focused on building useful projects. I’m also learning project management and UI design to better plan, structure, and design the tools I create.",
+    bio1: "I’m a passionate AI developer focused on building useful projects. I also explore UI design and project structuring to build better systems.",
     bio2: "python, reactjs, fastapi",
     skillsSummary: "",
-    cvUrl: "/CV.pdf"
+    cvUrl: "/CV.pdf",
   });
 
   useEffect(() => {
     const unsubscribe = onSnapshot(doc(db, "content", "about"), (doc) => {
-      if (doc.exists()) {
-        setAboutData(doc.data());
-      }
+      if (doc.exists()) setAboutData(doc.data());
     });
+
     return () => unsubscribe();
   }, []);
 
   return (
-    <section
-      id="about"
-      className=" md:container mx-auto py-24 px-4 relative flex align-center justify-around"
-    >
-      <div className="container mx-auto max-w-5xl">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-          About <span className="text-primary">Me</span>
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
-            <h3 className="font-bold text-2xl">{aboutData.headline}</h3>
-            <p className="text-muted-foreground">
+    <section id="about" className="relative py-16 md:py-24 lg:py-28 px-4 sm:px-6 lg:px-8 bg-transparent">
+      <div className="max-w-6xl mx-auto">
+        {/* SECTION TITLE */}
+        <div className="text-center mb-14">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground">
+            About <span className="text-primary">Me</span>
+          </h2>
+
+          <div className="w-20 h-[3px] bg-emerald-400/80 mx-auto mt-4 rounded-full" />
+        </div>
+
+        {/* MAIN GRID */}
+        <div className="grid lg:grid-cols-2 gap-16 items-start">
+          {/* LEFT CONTENT */}
+          <div className="space-y-8">
+            {/* HEADLINE */}
+            <h3 className="text-2xl md:text-3xl font-semibold leading-snug text-muted-foreground">
+              {aboutData.headline}
+            </h3>
+
+            {/* BIO */}
+            <p className="text-muted-foreground leading-relaxed">
               {aboutData.bio1}
             </p>
+
             {aboutData.bio2 && (
-              <p className="text-muted-foreground">
+              <p className="text-muted-foreground leading-relaxed">
                 {aboutData.bio2}
               </p>
             )}
-            {aboutData.skillsSummary && (
-              <p className="text-muted-foreground">{aboutData.skillsSummary}</p>
-            )}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="#contact" className="cosmic-button">
+
+            {/* BUTTONS */}
+            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+              <a href="#contact" className="inline-flex items-center justify-center px-[42px] py-4 rounded-full text-white font-semibold bg-gradient-to-br from-lime-400 via-emerald-500 to-teal-700 shadow-[0_0_40px_rgba(16,185,129,0.3)] transition-all duration-700 hover:-translate-y-[5px] hover:scale-[1.03] hover:shadow-[0_20px_60px_rgba(16,185,129,0.4)]">
                 Get in Touch
               </a>
+
               <a
                 href={aboutData.cvUrl || "/CV.pdf"}
-                download="Boluwatife_Gbadamosi_CV.pdf"
                 target="_blank"
-                className="border-primary bg-primary/30 text-center border-2 rounded-full  w-full md:w-40  flex items-center justify-center"
+                download
+                className="px-6 py-3 rounded-full border border-white/10 bg-white/5 text-muted-foreground text-center backdrop-blur-md hover:bg-white/10 transition"
               >
-                Download Cv
+                Download CV
               </a>
             </div>
           </div>
-          <div className="grid grid-col-1 gap-6">
-            <div className="graident-border p-6 card-hover">
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <Code />
-                </div>
-                <h4 className="text font-semibold text-xl mt-3">AI development</h4>
 
-              </div>
-              <div className="text-left">
-                <p>
-                  I
-                  build responsive user interfaces with HTML, CSS, JavaScript,
-                  and React, and create powerful backend APIs using Python,
-                  FastAPI, and MySQL.
-                </p>
-              </div>
-            </div>
-                <div className="graident-border p-6 card-hover">
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <User />
+          {/* RIGHT CARDS */}
+          <div className="grid gap-6">
+            {/* CARD 1 */}
+            <div className="bg-white/[0.04] border border-white/[0.08] backdrop-blur-xl rounded-2xl p-6 transition-all duration-500 hover:-translate-y-1.5 hover:border-emerald-500/40 hover:shadow-[0_20px_60px_rgba(16,185,129,0.1)]">
+              <div className="flex items-center gap-4">
+                <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+                  <Code size={20} />
                 </div>
-                <h4 className="text font-semibold text-xl mt-3">UI designs</h4>
+                <h4 className="text-xl font-semibold text-muted-foreground">
+                  AI Development
+                </h4>
+              </div>
 
-              </div>
-              <div className="text-left">
-                <p>
-                I’m growing in AI development while learning project management and UI design. I enjoy planning projects, designing user-friendly screens, and building tools that solve real problems.
-                </p>
-              </div>
+              <p className="mt-4 text-muted-foreground leading-relaxed">
+                I build responsive interfaces using React and Tailwind, and
+                develop backend systems with Python, FastAPI, and databases.
+              </p>
             </div>
-            <div className="graident-border p-6 card-hover">
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <Briefcase />
+
+            {/* CARD 2 */}
+            <div className="bg-white/[0.04] border border-white/[0.08] backdrop-blur-xl rounded-2xl p-6 transition-all duration-500 hover:-translate-y-1.5 hover:border-emerald-500/40 hover:shadow-[0_20px_60px_rgba(16,185,129,0.1)]">
+              <div className="flex items-center gap-4">
+                <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+                  <User size={20} />
                 </div>
-                <h4 className="text font-semibold text-xl mt-3">Project Management</h4>
+                <h4 className="text-xl font-semibold text-muted-foreground">
+                  UI Design
+                </h4>
+              </div>
 
-              </div>
-              <div className="text-left">
-                <p>
-                 I focus on managing projects from start to finish, coordinating tasks, and ensuring teams work efficiently toward their goals.
-                </p>
-              </div>
+              <p className="mt-4 text-muted-foreground leading-relaxed">
+                I design clean user interfaces and improve user experience
+                through structured layouts and simple interactions.
+              </p>
             </div>
-          
+
+            {/* CARD 3 */}
+            <div className="bg-white/[0.04] border border-white/[0.08] backdrop-blur-xl rounded-2xl p-6 transition-all duration-500 hover:-translate-y-1.5 hover:border-emerald-500/40 hover:shadow-[0_20px_60px_rgba(16,185,129,0.1)]">
+              <div className="flex items-center gap-4">
+                <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+                  <Briefcase size={20} />
+                </div>
+                <h4 className="text-xl font-semibold text-muted-foreground">
+                  Project Management
+                </h4>
+              </div>
+
+              <p className="mt-4 text-muted-foreground leading-relaxed">
+                I organize tasks, structure workflows, and ensure projects move
+                from idea to execution efficiently.
+              </p>
+            </div>
           </div>
         </div>
       </div>

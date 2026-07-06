@@ -32,7 +32,9 @@ const Login = () => {
   return (
     <div className="relative min-h-screen flex items-center justify-center p-4 overflow-hidden">
       <StarBackground />
-      <ThemeToggle />
+      <div className="fixed top-5 right-5 z-50">
+        <ThemeToggle />
+      </div>
       
       <div className="relative z-10 w-full max-w-md animate-in fade-in zoom-in duration-500">
         <div className="bg-card/40 backdrop-blur-xl p-8 rounded-2xl border border-white/10 shadow-2xl space-y-8">

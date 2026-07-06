@@ -51,7 +51,7 @@ const AdminLayout = () => {
       <div className="lg:hidden">
          {/* ThemeToggle is in mobile header above */}
       </div>
-      <div className="hidden lg:block">
+      <div className="hidden lg:fixed lg:block lg:top-5 lg:right-5 lg:z-40">
         <ThemeToggle />
       </div>
       

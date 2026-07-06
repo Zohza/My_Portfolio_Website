@@ -51,15 +51,16 @@ const StarBackground = () => {
         return () => window.removeEventListener('resize', handleResize)
     }, [])
   return (
-    <div className='fixed inset-0 overflow-hidden pointer-events-none z-0'>
+    <div className='fixed inset-0 overflow-hidden pointer-events-none z-0 '>
         {stars.map((star)=>(
-            <div key={star.id} className='star animate-pulse-subtle' style={{
+            <div key={star.id} className='star animate-pulse-subtle text-muted-foreground' style={{
                 width: star.size + 'px',
                 height:star.size + 'px' ,
                 left:star.x +'%',
                 top: star.y + '%',
                 opacity: star.opacity,
                 animationDuration: star.animationDuration + 's',
+             
             }}/>
 
            
