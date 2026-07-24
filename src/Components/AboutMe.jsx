@@ -62,7 +62,7 @@ const AboutMe = () => {
                 href={aboutData.cvUrl || "/CV.pdf"}
                 target="_blank"
                 download
-                className="px-6 py-3 rounded-full border border-white/10 bg-white/5 text-muted-foreground text-center backdrop-blur-md hover:bg-white/10 transition"
+                className="px-6 py-3 rounded-full border border-green/90 bg-green/5 ring-green-500 ring-2 text-muted-foreground text-center backdrop-blur-md hover:bg-white/10 transition"
               >
                 Download CV
               </a>
