@@ -90,9 +90,7 @@ const Footer = () => {
             &copy; {new Date().getFullYear()} BoluCodes. All rights reserved.
           </p>
 
-          <p className="text-muted-foreground/70">
-            Designed with intention &bull; Built with precision
-          </p>
+       
         </div>
       </div>
     </footer>
