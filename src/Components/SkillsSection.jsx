@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { cn } from "../lib/utils";
 
 import {
@@ -22,7 +22,6 @@ import {
   SiOpenai,
   SiLangchain,
   SiVercel,
-  SiExpo,
 } from "react-icons/si";
 
 const technologies = [
@@ -33,8 +32,6 @@ const technologies = [
   { name: "HTML5", icon: SiHtml5, category: "Frontend", color: "#E34F26" },
   { name: "CSS3", icon: SiCss3, category: "Frontend", color: "#1572B6" },
   { name: "Tailwind CSS", icon: SiTailwindcss, category: "Frontend", color: "#06B6D4" },
-  { name: "Expo", icon: SiExpo, category: "Frontend", color: "#fff" },
-  { name: "React Native", icon: SiReact, category: "Frontend", color: "#61DAFB" },
   { name: "Python", icon: SiPython, category: "Backend", color: "#3776AB" },
   { name: "FastAPI", icon: SiFastapi, category: "Backend", color: "#009688" },
   { name: "MySQL", icon: SiMysql, category: "Backend", color: "#4479A1" },
@@ -65,17 +62,14 @@ const cardVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.45, ease: "easeOut" },
+    transition: { duration: 0.4, ease: "easeOut" },
   },
-};
-
-const getAccentStyle = (color) => {
-  if (color === "#000" || color === "#fff") return {};
-  return { "--tech-color": color };
 };
 
 const SkillsSection = () => {
   const [category, setCategory] = useState("All");
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-60px" });
 
   const filtered =
     category === "All"
@@ -85,6 +79,7 @@ const SkillsSection = () => {
   return (
     <section
       id="skills"
+      ref={sectionRef}
       className="relative py-16 md:py-24 lg:py-28 px-4 sm:px-6 lg:px-8 overflow-hidden bg-transparent"
     >
       {/* Grid Overlay */}
@@ -126,19 +121,18 @@ const SkillsSection = () => {
           </div>
         </div>
 
-        {/* TECH GRID */}
+        {/* TECH GRID — keyed on category so stagger replays on filter change */}
         <motion.div
+          key={category}
           className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4"
           variants={containerVariants}
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
+          animate={isInView ? "visible" : "hidden"}
         >
           {filtered.map((tech) => (
             <motion.div
               key={tech.name}
               variants={cardVariants}
-              style={getAccentStyle(tech.color)}
               className={cn(
                 "group relative",
                 "bg-white/[0.04] backdrop-blur-sm",
@@ -165,7 +159,6 @@ const SkillsSection = () => {
               aria-label={`${tech.name} — ${tech.category}`}
               tabIndex={0}
             >
-              {/* Icon */}
               <tech.icon
                 size={30}
                 className="transition-all duration-300 ease-out group-hover:scale-110"
@@ -177,14 +170,12 @@ const SkillsSection = () => {
                 }}
               />
 
-              {/* Label */}
               <span className="text-xs font-medium text-muted-foreground group-hover:text-foreground transition-colors duration-300 text-center leading-tight">
                 {tech.name}
               </span>
             </motion.div>
           ))}
         </motion.div>
-
       </div>
     </section>
   );
