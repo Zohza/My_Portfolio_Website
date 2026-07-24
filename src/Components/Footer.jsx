@@ -17,14 +17,14 @@ const Footer = () => {
       </div>
 
       {/* MAIN CARD */}
-      <div className="relative max-w-6xl mx-auto rounded-2xl border border-border/70 bg-emerald-400/80   backdrop-blur-sm p-8 sm:p-10 md:p-14 shadow-sm">
+      <div className="relative max-w-6xl mx-auto rounded-2xl border border-border/70 bg-gradient-to-br from-lime-400 via-emerald-500 to-teal-700 text-white  backdrop-blur-sm p-8 sm:p-10 md:p-14 shadow-sm">
         {/* TOP SECTION */}
         <div className="flex flex-col md:flex-row justify-between gap-10 lg:gap-16">
 
           {/* BRAND */}
           <div className="space-y-4 max-w-md">
             <h2 className="text-2xl md:text-3xl font-bold text-foreground">
-              BoluCodes
+              BoluScript
             </h2>
 
             <p className="text-sm text-muted-foreground leading-relaxed">
@@ -34,13 +34,13 @@ const Footer = () => {
 
             {/* SOCIALS */}
             <div className="flex gap-3 pt-2">
-              <a className="p-2.5 rounded-xl bg-background border border-border/60 text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-all" href="#" aria-label="GitHub">
+              <a className="p-2.5 rounded-xl bg-background border border-border/60 text-foreground hover:text-foreground hover:border-foreground/30 transition-all" href="#" aria-label="GitHub">
                 <Github size={18} />
               </a>
-              <a className="p-2.5 rounded-xl bg-background border border-border/60 text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-all" href="#" aria-label="LinkedIn">
+              <a className="p-2.5 rounded-xl bg-background border border-border/60 text-foreground hover:text-foreground hover:border-foreground/30 transition-all" href="#" aria-label="LinkedIn">
                 <Linkedin size={18} />
               </a>
-              <a className="p-2.5 rounded-xl bg-background border border-border/60 text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-all" href="mailto:boluscript.dev@gmail.com" aria-label="Email">
+              <a className="p-2.5 rounded-xl bg-background border border-border/60 text-foreground hover:text-foreground hover:border-foreground/30 transition-all" href="mailto:boluscript.dev@gmail.com" aria-label="Email">
                 <Mail size={18} />
               </a>
             </div>
@@ -70,7 +70,7 @@ const Footer = () => {
           <div className="flex flex-col items-start md:items-end gap-3">
             <button
               onClick={scrollToTop}
-              className="group flex items-center gap-2 px-5 py-2.5 rounded-xl bg-background border border-border/60 text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-all text-sm"
+              className="group flex items-center gap-2 px-5 py-2.5 rounded-xl bg-background border border-border/60 text-foreground hover:text-foreground hover:border-foreground/30 transition-all text-sm"
             >
               <ArrowUp
                 size={16}

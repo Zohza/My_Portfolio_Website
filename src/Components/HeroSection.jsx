@@ -82,9 +82,7 @@ const HeroSection = () => {
 
           {/* Description */}
           <p className="mt-8 max-w-xl text-base sm:text-lg leading-relaxed text-muted-foreground">
-            I build simple AI tools and experiments that solve everyday
-            problems. I’m focused on learning, shipping, and improving every day
-            in the AI space.
+           I build AI-powered products and intelligent web applications that solve everyday problems. I enjoy building healthcare AI solutions, implementing RAG-powered chatbots, automating workflows, and continuously learning as I build.
           </p>
 
           <div className="mt-10">
