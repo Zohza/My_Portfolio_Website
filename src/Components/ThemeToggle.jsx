@@ -5,12 +5,14 @@ import { cn } from "../lib/utils"
 export const ThemeToggle = () =>{
     const [ isDarkMode, setIsDarkMode] = useState(() => {
         const storedTheme = localStorage.getItem('theme');
-        if (storedTheme === 'dark') {
+        // Default to dark on first visit (no saved theme yet), otherwise respect the saved theme
+        const isDark = storedTheme === null || storedTheme === 'dark';
+        if (isDark) {
             document.documentElement.classList.add('dark')
-            return true;
+        } else {
+            document.documentElement.classList.remove('dark')
         }
-        document.documentElement.classList.remove('dark')
-        return false;
+        return isDark;
     })
     const handleToggle =()=>{
             if (isDarkMode){
